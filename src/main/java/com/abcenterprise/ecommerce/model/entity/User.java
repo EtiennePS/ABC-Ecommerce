@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -39,6 +41,24 @@ public class User implements IGenericEntity, UserDetails {
 	
 	@NotNull
 	private String password;
+	
+	@Column(nullable = false)
+	private String firstname;
+	
+	@Column(nullable = false)
+	private String lastname;
+	
+	@Column
+	private String tel;
+	
+	@OneToMany(mappedBy = "user")
+	private List<CartLine> cartLines;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Order> orders;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Address> addresses;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( 

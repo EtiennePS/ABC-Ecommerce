@@ -1,6 +1,7 @@
 package com.abcenterprise.ecommerce.model.dto;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.validation.constraints.Pattern;
 
@@ -11,6 +12,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+import com.abcenterprise.ecommerce.model.entity.CartLine;
+import com.abcenterprise.ecommerce.model.entity.Order;
+import com.abcenterprise.ecommerce.model.entity.Address;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,20 +40,16 @@ public class UserDto extends RepresentationModel<UserDto> implements IGenericEnt
     
     private Collection<UserPrivilegeDto> privileges;
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
+	private String firstname;
+	
+	private String lastname;
+	
+	private String tel;
+	
+	private List<CartLine> cartLines;
+	
+	private List<Order> orders;
+	
+	private List<Address> addresses;
     
 }
