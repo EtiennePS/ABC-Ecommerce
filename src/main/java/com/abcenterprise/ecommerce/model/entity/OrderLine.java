@@ -14,6 +14,13 @@ public class OrderLine implements IGenericEntity {
 
 	public OrderLine() {}
 	
+	public OrderLine(CartLine cl, Order order) {
+		this.amount = cl.getAmount();
+		this.price = cl.getItem().getPrice();
+		this.item = cl.getItem();
+		this.order = order;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
