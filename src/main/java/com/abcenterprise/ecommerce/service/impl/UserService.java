@@ -30,13 +30,13 @@ public class UserService extends GetableService<User> implements IUserService, U
 	public User create(User u) {
 		String password = u.getPassword();
 		
-		if(StringUtils.hasLength(u.getUsername())) 
+		if(!StringUtils.hasLength(u.getUsername())) 
 			throw new IllegalEntityException("Username is mandatory!");
 		
-		if(StringUtils.hasLength(u.getEmail()))
+		if(!StringUtils.hasLength(u.getEmail()))
 			throw new IllegalEntityException("Email is mandatory!");
 		
-		if(StringUtils.hasLength(password))
+		if(!StringUtils.hasLength(password))
 			throw new IllegalEntityException("Password is mandatory!");
 		
 		u.setPassword(passwordEncoder.encode(password));
