@@ -1,5 +1,9 @@
 # ABC Enterprise Ecommerce
 
+## Branch
+master develop should have been the only branch. And they will once the work in progress in multi will be done!
+In the meantime, socle is a common part, ecommerce and configurator contains specific developpement for each app
+
 ## Requirement
 The jar require Java 16 and the following environment variable/java option :
 API_ABC_ECOMMERCE_BDD_USER
