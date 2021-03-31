@@ -1,10 +1,8 @@
 package com.abcenterprise.ecommerce.config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.client.LinkDiscoverer;
@@ -13,9 +11,6 @@ import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDi
 import org.springframework.plugin.core.SimplePluginRegistry;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.abcenterprise.ecommerce.model.entity.User;
-import com.abcenterprise.ecommerce.repository.UserRepository;
 
 @Configuration
 public class GeneralConfig {
@@ -36,11 +31,4 @@ public class GeneralConfig {
 			}
 		};
 	}
-	
-	/*@Bean
-	public ApplicationRunner initializer(UserRepository repository) {
-	    return args -> repository.saveAll(Arrays.asList(
-	        new User()
-	    ));
-	}*/
 }
