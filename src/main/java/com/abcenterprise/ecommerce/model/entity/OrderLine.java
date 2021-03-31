@@ -16,7 +16,7 @@ public class OrderLine implements IGenericEntity {
 	
 	public OrderLine(CartLine cl, Order order) {
 		this.amount = cl.getAmount();
-		this.price = cl.getItem().getPrice();
+		this.price = cl.getItem().getFullPrice();
 		this.item = cl.getItem();
 		this.order = order;
 	}
