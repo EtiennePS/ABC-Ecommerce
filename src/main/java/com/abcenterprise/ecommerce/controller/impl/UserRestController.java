@@ -67,7 +67,7 @@ public class UserRestController implements AuthenticationEntryPoint, IUserRestCo
 	
 	@PostMapping("/authenticate")
 	public ResponseEntity<UserDto> createAuthenticationToken(@RequestBody UserDto userIn) throws Exception {
-		String login = StringUtils.hasLength(userIn.getEmail()) ? userIn.getUsername() : userIn.getEmail();
+		String login = !StringUtils.hasLength(userIn.getEmail()) ? userIn.getUsername() : userIn.getEmail();
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, userIn.getPassword()));
 		User user = userService.getByUsernameOrEmail(login);
 		UserDto userOut = userMapper.toDto(user);
