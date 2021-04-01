@@ -48,7 +48,15 @@ public class CartLineService extends GetableService<CartLine> implements ICartLi
 	}
 
 	@Override
-	public void getAllByIds(List<Long> ids) {
-		repository.findAllById(ids);
+	public List<CartLine> getAllByIds(List<Long> ids) {
+		return repository.findAllById(ids);
+	}
+	
+	@Override
+	public List<CartLine> getAllByConnectedUser() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		User user = userService.getByUsername(username);
+		
+		return repository.findAllByUser(user);
 	}	
 }

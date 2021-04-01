@@ -7,6 +7,7 @@ import com.abcenterprise.ecommerce.model.entity.CartLine;
 public interface ICartLineService extends IGetableService<CartLine>, ICreatableService<CartLine> {
 
 	public void deleteAll(List<CartLine> cartLines);
-	public void getAllByIds(List<Long> ids);
+	public List<CartLine> getAllByIds(List<Long> ids);
+	public List<CartLine> getAllByConnectedUser();
 	
 }
