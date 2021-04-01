@@ -3,6 +3,7 @@ package com.abcenterprise.ecommerce.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -54,8 +55,7 @@ public class CartLineService extends GetableService<CartLine> implements ICartLi
 	
 	@Override
 	public List<CartLine> getAllByConnectedUser() {
-		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-		User user = userService.getByUsername(username);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		return repository.findAllByUser(user);
 	}	

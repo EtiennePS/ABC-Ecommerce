@@ -30,11 +30,10 @@ public class OrderService extends GetableService<Order> implements IOrderService
 
 	@Override
 	public Order create(Order o, List<Long> cartLineIds) {
-		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-		User user = userService.getByUsername(username);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		if(user.getCartLines().isEmpty())
-			throw new IllegalEntityException("There is nothing in the cart of " + username + "!");
+			throw new IllegalEntityException("There is nothing in the cart of " + user.getUsername() + "!");
 		
 		o.setUser(user);
 		
