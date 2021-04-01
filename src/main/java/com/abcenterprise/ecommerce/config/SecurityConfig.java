@@ -125,6 +125,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Appl
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.cors();
 	}
 	
 }
