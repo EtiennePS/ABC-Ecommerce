@@ -9,9 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.abcenterprise</groupId>
-	<artifactId>ecommerce</artifactId>
+	<artifactId>configurator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ecommerce</name>
+	<packaging>war</packaging>
+	<name>configurator</name>
 	<description>Demo project for Ynov&apos;s &quot;Architecture Logicielle&quot; lesson</description>
 	<properties>
 		<java.version>16</java.version>
