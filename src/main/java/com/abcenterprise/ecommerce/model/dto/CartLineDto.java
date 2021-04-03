@@ -1,5 +1,7 @@
 package com.abcenterprise.ecommerce.model.dto;
 
+import java.util.List;
+
 import org.springframework.hateoas.RepresentationModel;
 
 import com.abcenterprise.ecommerce.model.entity.IGenericEntity;
@@ -14,7 +16,9 @@ public class CartLineDto extends RepresentationModel<CartLineDto> implements IGe
 	
 	private Double amount;
 	
-	private ItemDto itemDto;
+	private ItemDto item;
+	
+	private List<OptionDto> selectedOptions;
 	
 	private UserDto user;
 }

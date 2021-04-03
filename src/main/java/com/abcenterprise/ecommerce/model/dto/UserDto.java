@@ -13,10 +13,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-import com.abcenterprise.ecommerce.model.entity.CartLine;
-import com.abcenterprise.ecommerce.model.entity.Order;
-import com.abcenterprise.ecommerce.model.entity.Address;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -46,10 +42,10 @@ public class UserDto extends RepresentationModel<UserDto> implements IGenericEnt
 	
 	private String tel;
 	
-	private List<CartLine> cartLines;
+	private List<CartLineDto> cartLines;
 	
-	private List<Order> orders;
+	private List<OrderDto> orders;
 	
-	private List<Address> addresses;
+	private List<AddressDto> addresses;
     
 }
