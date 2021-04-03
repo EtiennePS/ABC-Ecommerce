@@ -16,5 +16,5 @@ public class CityDto extends RepresentationModel<CityDto> implements IGenericEnt
 	
 	private String postalCode;
 	
-	private CountryDto countryDto;
+	private CountryDto country;
 }

@@ -16,5 +16,5 @@ public class OptionDto extends RepresentationModel<OptionDto> implements IGeneri
 	
 	private Double price;
 	
-	private ItemDto itemDto;
+	private ItemDto item;
 }

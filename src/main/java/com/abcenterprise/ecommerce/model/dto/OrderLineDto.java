@@ -1,5 +1,7 @@
 package com.abcenterprise.ecommerce.model.dto;
 
+import java.util.List;
+
 import org.springframework.hateoas.RepresentationModel;
 
 import com.abcenterprise.ecommerce.model.entity.IGenericEntity;
@@ -16,7 +18,9 @@ public class OrderLineDto extends RepresentationModel<OrderLineDto> implements I
 	
 	private Double price;
 	
-	private ItemDto itemDto;
+	private ItemDto item;
 	
-	private OrderDto orderDto;
+	private List<OptionDto> selectedOptions;
+	
+	private OrderDto order;
 }

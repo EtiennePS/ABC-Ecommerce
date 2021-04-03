@@ -19,7 +19,7 @@ public class OrderDto extends RepresentationModel<OrderDto> implements IGenericE
 	
 	private ZonedDateTime creationDate;
 	
-	private List<OrderLineDto> orderLineDtos;
+	private List<OrderLineDto> orderLines;
 	
 	private UserDto user;
 	

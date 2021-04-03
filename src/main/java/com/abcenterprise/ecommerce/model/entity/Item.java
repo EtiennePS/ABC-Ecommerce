@@ -38,7 +38,4 @@ public class Item implements IGenericEntity {
 	@OneToMany(mappedBy = "item")
 	private List<Option> options;
 	
-	public Double getFullPrice() {
-		return (price == null ? 0 : price) + this.options.stream().mapToDouble(i -> i.getPrice()).sum();
-	}
 }
