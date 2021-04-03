@@ -22,7 +22,7 @@ public class AddressDto extends RepresentationModel<AddressDto> implements IGene
 	
 	private String line2;
 	
-	private CityDto cityDto;
+	private CityDto city;
 	
 	private UserDto user;
 	

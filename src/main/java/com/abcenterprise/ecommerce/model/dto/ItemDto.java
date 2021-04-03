@@ -26,5 +26,5 @@ public class ItemDto extends RepresentationModel<ItemDto> implements IGenericEnt
 	
 	private Integer productionDelay;
 	
-	private List<OptionDto> optionDtos;
+	private List<OptionDto> options;
 }
