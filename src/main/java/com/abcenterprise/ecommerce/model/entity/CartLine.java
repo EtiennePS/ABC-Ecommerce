@@ -32,4 +32,8 @@ public class CartLine implements IGenericEntity {
 	
 	@ManyToOne
 	private User user;
+	
+	public Double getPrice() {
+		return (item.getPrice() == null ? 0 : item.getPrice()) + this.selectedOptions.stream().mapToDouble(i -> i.getPrice()).sum();
+	}
 }
