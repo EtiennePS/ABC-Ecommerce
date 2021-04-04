@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
@@ -51,12 +53,15 @@ public class User implements IGenericEntity, UserDetails {
 	@Column
 	private String tel;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "user")
 	private List<CartLine> cartLines;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "user")
 	private List<Order> orders;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "user")
 	private List<Address> addresses;
 	

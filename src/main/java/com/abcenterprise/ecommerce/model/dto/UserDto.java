@@ -42,10 +42,6 @@ public class UserDto extends RepresentationModel<UserDto> implements IGenericEnt
 	
 	private String tel;
 	
-	private List<CartLineDto> cartLines;
-	
-	private List<OrderDto> orders;
-	
 	private List<AddressDto> addresses;
     
 }
