@@ -1,5 +1,9 @@
 package com.abcenterprise.ecommerce.service.impl;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import com.abcenterprise.ecommerce.model.entity.OrderLine;
 import com.abcenterprise.ecommerce.model.entity.User;
 import com.abcenterprise.ecommerce.repository.OrderRepository;
 import com.abcenterprise.ecommerce.service.ICartLineService;
+import com.abcenterprise.ecommerce.service.IOrderLineService;
 import com.abcenterprise.ecommerce.service.IOrderService;
 import com.abcenterprise.ecommerce.service.IUserService;
 
@@ -27,6 +32,9 @@ public class OrderService extends GetableService<Order> implements IOrderService
 	
 	@Autowired
 	protected ICartLineService cartLineService;
+	
+	@Autowired
+	protected IOrderLineService orderLineService;
 
 	@Override
 	public Order create(Order o, List<Long> cartLineIds) {
@@ -42,12 +50,28 @@ public class OrderService extends GetableService<Order> implements IOrderService
 		if(cartLineIds.size() != cartLines.size())
 			throw new IllegalEntityException("One of the cartLineId doesn't exist or doesn't belong to the user or is duplicate");
 		
+		o.setOrderLines(new ArrayList<OrderLine>());
+		
 		for(CartLine cl : cartLines) {
 			o.getOrderLines().add(new OrderLine(cl, o)); //transform cartLine into OrderLine
 		}
 		
-		cartLineService.deleteAll(user.getCartLines()); //remove the lines from the cart
+		o.setCreationDate(ZonedDateTime.of(LocalDateTime.now(), ZoneId.of("UTC")));
+		o = repository.save(o);
 		
-		return repository.save(o);
+		for(OrderLine ol : o.getOrderLines()) {
+			this.orderLineService.create(ol);
+		}
+		
+		cartLineService.deleteAll(cartLineService.getAllByIds(cartLineIds)); //remove the lines from the cart
+		
+		return repository.getOne(o.getId());
 	}
+	
+	@Override
+	public List<Order> getAllByConnectedUser() {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		return repository.findAllByUser(user);
+	}	
 }
