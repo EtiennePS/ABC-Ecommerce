@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import lombok.Data;
 
 @Entity @Data
@@ -35,6 +38,7 @@ public class Item implements IGenericEntity {
 	@Column(nullable = true)
 	private Integer productionDelay;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "item")
 	private List<Option> options;
 	

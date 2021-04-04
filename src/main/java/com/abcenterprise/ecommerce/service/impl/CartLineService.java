@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 import com.abcenterprise.ecommerce.exception.IllegalEntityException;
 import com.abcenterprise.ecommerce.model.entity.CartLine;
 import com.abcenterprise.ecommerce.model.entity.Item;
+import com.abcenterprise.ecommerce.model.entity.Option;
 import com.abcenterprise.ecommerce.model.entity.User;
 import com.abcenterprise.ecommerce.repository.CartLineRepository;
 import com.abcenterprise.ecommerce.service.ICartLineService;
 import com.abcenterprise.ecommerce.service.IItemService;
+import com.abcenterprise.ecommerce.service.IOptionService;
 import com.abcenterprise.ecommerce.service.IUserService;
 
 @Service
@@ -26,11 +28,13 @@ public class CartLineService extends GetableService<CartLine> implements ICartLi
 	
 	@Autowired
 	protected IItemService itemService;
+	
+	@Autowired
+	protected IOptionService optionService;
 
 	@Override
 	public CartLine create(CartLine c) {
-		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-		User user = userService.getByUsername(username);
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		c.setUser(user);
 		
 		if(c.getItem() == null || c.getItem().getId() == null)
@@ -38,6 +42,16 @@ public class CartLineService extends GetableService<CartLine> implements ICartLi
 		
 		Item item = itemService.getById(c.getItem().getId());
 		c.setItem(item);
+		
+		for(Option o : c.getSelectedOptions()) {
+			if(o.getId() == null)
+				throw new IllegalEntityException("All options must have an id");
+			
+			o = optionService.getById(o.getId());
+			
+			if(o.getItem().getId() != c.getItem().getId()) 
+				throw new IllegalEntityException("The following option doesn't belong to the selected item : " + o);
+		}
 		
 		return repository.save(c);
 	}
