@@ -27,7 +27,6 @@ public class UserDto extends RepresentationModel<UserDto> implements IGenericEnt
 	@Pattern(regexp = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")
 	private String email;
 	
-	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@JsonInclude(value=Include.NON_EMPTY)

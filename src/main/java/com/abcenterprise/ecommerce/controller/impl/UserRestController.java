@@ -1,12 +1,17 @@
 package com.abcenterprise.ecommerce.controller.impl;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.io.IOException;
+import java.net.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -77,7 +82,9 @@ public class UserRestController implements AuthenticationEntryPoint, IUserRestCo
 	
 	@PostMapping("/register")
 	public ResponseEntity<UserDto> saveUser(@RequestBody UserDto user) throws Exception {
-		return ResponseEntity.ok(userMapper.toDto(userService.create(userMapper.toEntity(user))));
+		UserDto userOut = userMapper.toDto(userService.create(userMapper.toEntity(user)));
+		Link self = linkTo(methodOn(UserRestController.class).getById(userOut.getId())).withSelfRel();
+		return ResponseEntity.created(new URI(self.getHref())).body(userOut);
 	}
 	
 	@Override
