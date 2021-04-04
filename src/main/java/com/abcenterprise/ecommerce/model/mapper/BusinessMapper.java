@@ -3,6 +3,8 @@ package com.abcenterprise.ecommerce.model.mapper;
 import java.util.Collection;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 import org.springframework.hateoas.CollectionModel;
 
 import com.abcenterprise.ecommerce.model.dto.AddressDto;
@@ -64,6 +66,7 @@ public abstract class BusinessMapper extends HateoasMapper {
 	public abstract Item toEntity(ItemDto dto);
 	public abstract Collection<Item> toItemEntity(Collection<ItemDto> dto);
 	
+	@Mapping( target = "options", qualifiedByName = "noItem")
 	public abstract ItemDto toDto(Item e);
 	protected abstract Collection<ItemDto> toItemDtoNoLinks(Collection<Item> e);
 	public CollectionModel<ItemDto> toItemDto(Collection<Item> e) {
@@ -73,7 +76,11 @@ public abstract class BusinessMapper extends HateoasMapper {
 	public abstract Option toEntity(OptionDto dto);
 	public abstract Collection<Option> toOptionEntity(Collection<OptionDto> dto);
 	
+	@Mapping(target = "item.options", ignore = true) // To prevent infinite mapping loop
 	public abstract OptionDto toDto(Option e);
+	@Mapping(target = "item", ignore = true)
+	@Named("noItem")
+	public abstract OptionDto toDtoNoItem(Option e);
 	protected abstract Collection<OptionDto> toOptionDtoNoLinks(Collection<Option> e);
 	public CollectionModel<OptionDto> toOptionDto(Collection<Option> e) {
 		return toOptionDtoCollectionModel(toOptionDtoNoLinks(e));
