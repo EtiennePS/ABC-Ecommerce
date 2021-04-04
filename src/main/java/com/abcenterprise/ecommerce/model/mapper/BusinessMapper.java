@@ -89,6 +89,7 @@ public abstract class BusinessMapper extends HateoasMapper {
 	public abstract Order toEntity(OrderDto dto);
 	public abstract Collection<Order> toOrderEntity(Collection<OrderDto> dto);
 	
+	@Mapping( target = "orderLines", qualifiedByName = "noOrder")
 	public abstract OrderDto toDto(Order e);
 	protected abstract Collection<OrderDto> toOrderDtoNoLinks(Collection<Order> e);
 	public CollectionModel<OrderDto> toOrderDto(Collection<Order> e) {
@@ -97,8 +98,10 @@ public abstract class BusinessMapper extends HateoasMapper {
 	
 	public abstract OrderLine toEntity(OrderLineDto dto);
 	public abstract Collection<OrderLine> toOrderLineEntity(Collection<OrderLineDto> dto);
-	
 	public abstract OrderLineDto toDto(OrderLine e);
+	@Mapping(target = "order", ignore = true)
+	@Named("noOrder")
+	public abstract OrderLineDto toDtoNoOrder(OrderLine e);
 	protected abstract Collection<OrderLineDto> toOrderLineDtoNoLinks(Collection<OrderLine> e);
 	public CollectionModel<OrderLineDto> toOrderLineDto(Collection<OrderLine> e) {
 		return toOrderLineDtoCollectionModel(toOrderLineDtoNoLinks(e));

@@ -16,6 +16,8 @@ public class CartLineDto extends RepresentationModel<CartLineDto> implements IGe
 	
 	private Double amount;
 	
+	private Double price;
+	
 	private ItemDto item;
 	
 	private List<OptionDto> selectedOptions;
