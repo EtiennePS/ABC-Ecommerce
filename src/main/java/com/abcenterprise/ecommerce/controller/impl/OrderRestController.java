@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abcenterprise.ecommerce.config.SecurityConfig;
+import com.abcenterprise.ecommerce.model.dto.CartLineDto;
 import com.abcenterprise.ecommerce.model.dto.OrderDto;
 import com.abcenterprise.ecommerce.model.mapper.BusinessMapper;
 import com.abcenterprise.ecommerce.service.IOrderService;
@@ -48,6 +49,12 @@ public class OrderRestController {
 	@ApiOperation(authorizations = @Authorization(value = "Bearer"), value = "")
 	public OrderDto getById(@PathVariable Long id) {
 		return mapper.toDto(orderService.getById(id));
+	}
+	
+	@GetMapping("/mines")
+	@ApiOperation(authorizations = @Authorization(value = "Bearer"), value = "")
+	public CollectionModel<OrderDto> getAllFromUser() {
+		return mapper.toOrderDto(orderService.getAllByConnectedUser());
 	}
 	
 	@PostMapping("/")
