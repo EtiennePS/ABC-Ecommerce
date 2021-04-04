@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import lombok.Data;
 
 @Entity @Data
@@ -29,6 +32,7 @@ public class Order implements IGenericEntity {
 	@Column(nullable = false)
 	private ZonedDateTime creationDate;
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "order")
 	private List<OrderLine> orderLines;
 	

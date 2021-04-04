@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -38,7 +39,7 @@ public class OrderLine implements IGenericEntity {
 	@ManyToOne
 	private Item item;
 	
-	@OneToMany
+	@ManyToMany
 	private List<Option> selectedOptions;
 	
 	@ManyToOne
